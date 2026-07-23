@@ -1,7 +1,6 @@
-// TODO: substituir por domínio real assim que o site for publicado/registrado.
-// Mantido como example.com (domínio reservado para exemplos, RFC 2606) em vez
-// de um domínio inventado, para nunca parecer um domínio real por engano.
-export const SITE_URL = "https://example.com";
+// Domínio de produção no Vercel. Atualizar aqui se um domínio próprio
+// (ex.: glori.com.br) for configurado depois.
+export const SITE_URL = "https://glori-landing-page.vercel.app";
 
 export const SITE_NAME = "Glori + Patrick Queiroz";
 
