@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+/*
+ * Tema claro fixo por decisão de acessibilidade (público prioritário 60+):
+ * fundo claro / texto escuro sempre, sem alternância por
+ * prefers-color-scheme. Não reintroduzir um bloco de dark mode aqui.
+ *
+ * Cores de marca extraídas por leitura de pixel de public/assets/logo.png
+ * (script Python/PIL, não estimadas visualmente). Tons -dark/-tint
+ * derivados por mistura matemática e validados contra WCAG AA (4.5:1).
+ */
+:root {
+  color-scheme: light;
+
+  --background: #ffffff;
+  --foreground: #171717;
+  --foreground-muted: #5a5a5a;
+
+  --brand-blue: #5b6e9e;
+  --brand-blue-dark: #424f72;
+  --brand-blue-tint: #f4f5f8;
+
+  --brand-orange: #d48b22;
+  --brand-orange-dark: #a56c1b;
+  --brand-orange-tint: #fcf6ed;
+
+  --brand-white: #ffffff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-foreground-muted: var(--foreground-muted);
+
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-blue-dark: var(--brand-blue-dark);
+  --color-brand-blue-tint: var(--brand-blue-tint);
+
+  --color-brand-orange: var(--brand-orange);
+  --color-brand-orange-dark: var(--brand-orange-dark);
+  --color-brand-orange-tint: var(--brand-orange-tint);
+
+  --color-brand-white: var(--brand-white);
+
+  --font-sans: var(--font-sans);
+
+  /* Corpo mínimo 18px (não os 16px padrão de mercado) para o público 60+. */
+  --text-base: 1.125rem;
+  --text-base--line-height: 1.7;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-size: var(--text-base);
+  line-height: var(--text-base--line-height);
+}
+
+/*
+ * Foco visível global: muitos usuários mais velhos navegam por teclado ou
+ * com dificuldade motora fina. Aplica a todo elemento interativo por
+ * padrão, sem depender de cada componente declarar o próprio estado.
+ */
+:focus-visible {
+  outline: 3px solid var(--brand-blue-dark);
+  outline-offset: 2px;
+}
+
+/*
+ * Entrada sutil ao rolar (fade + leve translateY), via components/Reveal.tsx.
+ * Visível por padrão sempre: o atributo `data-hidden` só é definido pelo
+ * próprio JS no cliente (nunca no HTML gerado pelo servidor), então se o
+ * script falhar ou não rodar, o conteúdo nunca fica invisível.
+ * A regra fica inteira dentro de prefers-reduced-motion: no-preference —
+ * com a preferência de movimento reduzido ativada, `data-hidden` nunca tem
+ * efeito nenhum e o conteúdo aparece direto, sem transição.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    transition:
+      opacity 350ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal[data-hidden="true"] {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
