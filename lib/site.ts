@@ -1,6 +1,5 @@
-// Domínio de produção no Vercel. Atualizar aqui se um domínio próprio
-// (ex.: glori.com.br) for configurado depois.
-export const SITE_URL = "https://glori-landing-page.vercel.app";
+// Domínio próprio, configurado no Vercel e apontado no Registro.br.
+export const SITE_URL = "https://glorisaude.com.br";
 
 export const SITE_NAME = "Glori + Patrick Queiroz";
 
